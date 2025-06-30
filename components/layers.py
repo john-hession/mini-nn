@@ -15,7 +15,7 @@ class Linear:
         
         return self.output
     
-    def backwards(self, out_grad, learning_rate):
+    def backward(self, out_grad, learning_rate):
         ## x w^t + b, derivatives trivial bx terms drop
         # derivative wrt to x = w^t
         # derivative wrt to w = x
