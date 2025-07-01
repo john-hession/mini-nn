@@ -23,7 +23,7 @@ class MSELoss:
         # derivative wrt to y_hat(true values) is irrelevant
         input_derivative = (2/self.observed.shape[0])*(self.observed - self.predicted)
         
-        return input_derivative * learning_rate
+        return input_derivative
     
 
 class CrossEntropyLoss:
@@ -33,5 +33,16 @@ class CrossEntropyLoss:
         self.observed = observed
         self.predicted = predicted
         self.error = None
+        
+    def forward(self):
+        # - sum(observed * log(predicted))
+        return np.sum(self.observed * np.log(self.predicted + 0.00001)) * -1
     
-    ## TODO: Cross entropy, accuracy
+    def backward(self):
+        # derivative wrt to q: 
+        # - sum(observed * log(predicted)) only care about 1 class
+        # -observed_i * log(predicted_i) d/pred_i
+        # - observed_i * 1/predicted_i
+        
+        input_derivative =  self.predicted - self.observed 
+        return input_derivative

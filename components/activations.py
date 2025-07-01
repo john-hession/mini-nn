@@ -63,7 +63,7 @@ class SoftMax:
     
     
     def backward(self, out_grad):
-        
+        # softmax derivative
         out_grad = np.reshape(out_grad, (1,-1))
         output = np.reshape(self.output, (1,-1))
         softmax_deriv = (output * np.identity(output.size) - output.transpose() @ output)
